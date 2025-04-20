@@ -92913,7 +92913,7 @@ var $async$zI=A.D(function(a,b){if(a===1){p.push(b)
 s=q}while(true)switch(s){case 0:j=o.aaB()
 i=B.d.po(o.w.a.a)
 h=i.length===0?null:i
-g=A.dJ("http://127.0.0.1:8000/generate-video",0,null)
+g=A.dJ("https://simplyactive-app-backend.onrender.com/generate-video",0,null)
 f=t.N
 e=t.z
 d=A.aa(["workout",j,"video_name",h],f,e)
