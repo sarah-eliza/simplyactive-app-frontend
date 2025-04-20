@@ -6,20 +6,21 @@ on:
       - master
 
 permissions:
-  contents: write
   pages: write
   id-token: write
+  contents: read
 
 concurrency:
   group: "pages"
-  cancel-in-progress: false
+  cancel-in-progress: true
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repo
+        uses: actions/checkout@v3
 
       - name: Install Flutter
         uses: subosito/flutter-action@v2
@@ -32,16 +33,9 @@ jobs:
       - name: Build Flutter Web
         run: flutter build web --dart-define=SUPABASE_URL=${{ secrets.SUPABASE_URL }} --dart-define=SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }} --dart-define=API_BASE_URL=${{ secrets.API_BASE_URL }}
 
-      - name: Upload GitHub Pages artifact
+      - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          name: github-pages
-          path: build/web
-
-      - name: Upload fallback artifact (required for Pages sometimes)
-        uses: actions/upload-artifact@v3
-        with:
-          name: github-pages
           path: build/web
 
   deploy:
