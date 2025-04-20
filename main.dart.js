@@ -93201,7 +93201,7 @@ ze(a,b){return this.ai8(a,b)},
 ai8(a,b){var s=0,r=A.C(t.H),q=1,p=[],o,n,m,l,k,j,i
 var $async$ze=A.D(function(c,d){if(c===1){p.push(d)
 s=q}while(true)switch(s){case 0:q=3
-o=A.dJ("/video-url?file_url="+A.to(2,b,B.a2,!1),0,null)
+o=A.dJ("https://simplyactive-app-backend.onrender.com/video-url?file_url="+A.to(2,b,B.a2,!1),0,null)
 s=6
 return A.E(A.aN1(o,null),$async$ze)
 case 6:n=d
