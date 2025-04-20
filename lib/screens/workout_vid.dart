@@ -26,16 +26,18 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
 
     _controller = VideoPlayerController.networkUrl(Uri.parse(widget.videoPath));
     _initializeVideoPlayerFuture = _controller.initialize().then((_) {
-      _chewieController = ChewieController(
-        videoPlayerController: _controller,
-        autoPlay: true,
-        looping: false,
-        allowedScreenSleep: false,
-        allowMuting: true,
-        showControls: true,
-        aspectRatio: _controller.value.aspectRatio,
-      );
-      setState(() {});
+      if (mounted) {
+        _chewieController = ChewieController(
+          videoPlayerController: _controller,
+          autoPlay: true,
+          looping: false,
+          allowedScreenSleep: false,
+          allowMuting: true,
+          showControls: true,
+          aspectRatio: _controller.value.aspectRatio,
+        );
+        setState(() {});
+      }
     });
 
     _startHideControlsTimer();
@@ -64,16 +66,20 @@ class _WorkoutVideoPageState extends State<WorkoutVideoPage> {
   void _startHideControlsTimer() {
     _hideControlsTimer?.cancel();
     _hideControlsTimer = Timer(const Duration(seconds: 3), () {
-      setState(() {
-        _showControls = false;
-      });
+      if (mounted) {
+        setState(() {
+          _showControls = false;
+        });
+      }
     });
   }
 
   void _onUserInteraction() {
-    setState(() {
-      _showControls = true;
-    });
+    if (mounted) {
+      setState(() {
+        _showControls = true;
+      });
+    }
     _startHideControlsTimer();
   }
 
