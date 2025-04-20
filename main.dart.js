@@ -93280,8 +93280,9 @@ s.aB()},
 U0(){var s=this.w
 if(s!=null)s.aa(0)
 this.w=A.bH(B.hg,new A.azY(this))},
-Sl(){this.P(new A.azW(this))
-this.U0()},
+Sl(){var s=this
+if(s.c!=null)s.P(new A.azW(s))
+s.U0()},
 Tu(a){var s=this.d
 s===$&&A.a()
 s.eN(new A.aJ(s.a.b.a+a.a))},
@@ -93289,19 +93290,20 @@ I(a){var s=this.f
 s===$&&A.a()
 return A.Qy(null,B.l,new A.uE(s,new A.aA4(this),null,t.qs),null)}}
 A.aA6.prototype={
-$1(a){var s=this.a,r=s.d
-r===$&&A.a()
-r=new A.na(r,!0,!1,!0,J.aGo(r.a),!1,!0,$.at())
-r.nZ()
-s.e=r
-s.P(new A.aA5())},
+$1(a){var s,r=this.a
+if(r.c!=null){s=r.d
+s===$&&A.a()
+s=new A.na(s,!0,!1,!0,J.aGo(s.a),!1,!0,$.at())
+s.nZ()
+r.e=s
+r.P(new A.aA5())}},
 $S:22}
 A.aA5.prototype={
 $0(){},
 $S:0}
 A.azY.prototype={
 $0(){var s=this.a
-s.P(new A.azX(s))},
+if(s.c!=null)s.P(new A.azX(s))},
 $S:0}
 A.azX.prototype={
 $0(){this.a.r=!1},
