@@ -5,12 +5,16 @@ on:
     branches:
       - master
 
+permissions:
+  contents: write  # Required by peaceiris/actions-gh-pages
+
 jobs:
   build:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
       - name: Install Flutter
         uses: subosito/flutter-action@v2
@@ -21,7 +25,7 @@ jobs:
         run: flutter pub get
 
       - name: Build Flutter Web
-        run: flutter build web --dart-define=SUPABASE_URL=${{ secrets.SUPABASE_URL }} --dart-define=SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }} --dart-define=API_BASE_URL=${{ secrets.API_BASE_URL}}
+        run: flutter build web --dart-define=SUPABASE_URL=${{ secrets.SUPABASE_URL }} --dart-define=SUPABASE_ANON_KEY=${{ secrets.SUPABASE_ANON_KEY }} --dart-define=API_BASE_URL=${{ secrets.API_BASE_URL }}
         
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
