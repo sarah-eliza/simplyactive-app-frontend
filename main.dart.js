@@ -27506,7 +27506,7 @@ var $async$aBW=A.D(function(a,b){if(a===1)return A.z(b,r)
 while(true)switch(s){case 0:if($.a8==null)A.aEA()
 $.a8.toString
 s=2
-return A.E(A.amq("",""),$async$aBW)
+return A.E(A.amq("eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImJueGFwcnZtbW9tenRoc25iaWhtIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDI4NzA5ODEsImV4cCI6MjA1ODQ0Njk4MX0.6wX3-5OPm0y1XbsNUFHqrSEuE7bw27fwwrSFS0fV28Y","https://bnxaprvmmomzthsnbihm.supabase.co"),$async$aBW)
 case 2:if($.a8==null)A.aEA()
 q=$.a8
 q.toString
@@ -29001,7 +29001,7 @@ A.aAk.prototype={
 $1(a){var s=A.eO().b
 if(s==null)s=null
 else{s=s.canvasKitBaseUrl
-if(s==null)s=null}return(s==null?"https://www.gstatic.com/flutter-canvaskit/18b71d647a292a980abb405ac7d16fe1f0b20434/":s)+a},
+if(s==null)s=null}return(s==null?"https://www.gstatic.com/flutter-canvaskit/cf56914b326edb0ccb123ffdc60f00060bd513fa/":s)+a},
 $S:65}
 A.a3D.prototype={
 ee(a){B.c.aH(this.a.a.save())},
