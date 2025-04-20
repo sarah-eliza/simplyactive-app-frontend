@@ -38,6 +38,12 @@ jobs:
           name: github-pages
           path: build/web
 
+      - name: Upload fallback artifact (required for Pages sometimes)
+        uses: actions/upload-artifact@v3
+        with:
+          name: github-pages
+          path: build/web
+
   deploy:
     needs: build
     runs-on: ubuntu-latest
