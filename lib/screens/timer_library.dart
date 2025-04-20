@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
-import 'workout_vid.dart'; // Import the video player page
+
+import 'workout_vid.dart'; // Video player screen
 
 class TimerLibrary extends StatefulWidget {
   final String timerType; // "HIIT" or "Strength"
@@ -16,10 +17,12 @@ class TimerLibrary extends StatefulWidget {
 class _TimerLibraryState extends State<TimerLibrary> {
   late final Stream<List<Map<String, dynamic>>> _timerStream;
 
+  // Get API base URL from environment
+  static const String _apiBaseUrl = String.fromEnvironment('API_BASE_URL');
+
   @override
   void initState() {
     super.initState();
-    // Stream all rows from the timer_video_metadata table.
     _timerStream = Supabase.instance.client
         .from('timer_video_metadata')
         .stream(primaryKey: ['id']);
@@ -27,8 +30,8 @@ class _TimerLibraryState extends State<TimerLibrary> {
 
   Future<void> _playVideo(BuildContext context, String fileName) async {
     try {
-      final baseUrl = 'http://127.0.0.1:8000'; // Change if deployed
-      final response = await http.get(Uri.parse('$baseUrl/video-url?file_url=${Uri.encodeComponent(fileName)}'));
+      final uri = Uri.parse('$_apiBaseUrl/video-url?file_url=${Uri.encodeComponent(fileName)}');
+      final response = await http.get(uri);
 
       if (response.statusCode == 200) {
         final videoUrl = jsonDecode(response.body)['url'];
@@ -70,7 +73,6 @@ class _TimerLibraryState extends State<TimerLibrary> {
             return const Center(child: Text('No videos available'));
           }
 
-          // Filter videos by type
           final filteredVideos = videos.where((video) {
             final fileName = (video['file_name'] as String?) ?? '';
             return fileName.toLowerCase().contains(widget.timerType.toLowerCase());
