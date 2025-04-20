@@ -71,6 +71,10 @@ class _ExerciseBuilderTableState extends State<ExerciseBuilderTable>
   late TabController _tabController;
   final double _rowHeight = 80.0;
 
+
+  // NEW: API base URL from dart-define
+  static const String baseUrl = String.fromEnvironment('API_BASE_URL');
+
   @override
   void initState() {
     super.initState();
@@ -135,7 +139,6 @@ class _ExerciseBuilderTableState extends State<ExerciseBuilderTable>
     final rawName = _videoNameController.text.trim();
     final String? videoName = rawName.isEmpty ? null : rawName;
 
-    final String baseUrl = 'http://127.0.0.1:8000'; // Update for production.
     final Uri url = Uri.parse('$baseUrl/generate-video');
 
     final Map<String, dynamic> bodyData = {
