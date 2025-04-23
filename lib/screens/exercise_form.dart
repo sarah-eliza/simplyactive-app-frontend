@@ -71,7 +71,6 @@ class _ExerciseBuilderTableState extends State<ExerciseBuilderTable>
   late TabController _tabController;
   final double _rowHeight = 80.0;
 
-
   // NEW: API base URL from dart-define
   static const String baseUrl = String.fromEnvironment('API_BASE_URL');
 
@@ -200,8 +199,6 @@ class _ExerciseBuilderTableState extends State<ExerciseBuilderTable>
       );
     }
   }
-
-  // … Insert your existing _buildTableHeader, _buildRow, and _buildReorderableTable methods here …
 
   Widget _buildTableHeader() {
     return Container(
@@ -402,6 +399,7 @@ class _ExerciseBuilderTableState extends State<ExerciseBuilderTable>
               child: TabBarView(
                 controller: _tabController,
                 children: [
+                  // Warmup Tab
                   SingleChildScrollView(
                     child: _buildReorderableTable(
                       warmupRows,
@@ -413,6 +411,8 @@ class _ExerciseBuilderTableState extends State<ExerciseBuilderTable>
                       (i) => setState(() => warmupRows.insert(i + 1, warmupRows[i].duplicate())),
                     ),
                   ),
+
+                  // Round Tab
                   SingleChildScrollView(
                     child: Column(
                       children: [
@@ -433,6 +433,8 @@ class _ExerciseBuilderTableState extends State<ExerciseBuilderTable>
                               },
                             ),
                             const SizedBox(width: 20),
+
+                            // Add New Round
                             ElevatedButton(
                               onPressed: () {
                                 setState(() {
@@ -443,8 +445,27 @@ class _ExerciseBuilderTableState extends State<ExerciseBuilderTable>
                               },
                               child: const Text("Add New Round"),
                             ),
+
+                            const SizedBox(width: 12),
+
+                            // Repeat Previous Round
+                            ElevatedButton(
+                              onPressed: () {
+                                setState(() {
+                                  final prev = selectedRound;
+                                  maxRound++;
+                                  roundRows[maxRound] =
+                                      roundRows[prev]!
+                                          .map((r) => r.duplicate())
+                                          .toList();
+                                  selectedRound = maxRound;
+                                });
+                              },
+                              child: const Text("Repeat Round"),
+                            ),
                           ],
                         ),
+
                         _buildReorderableTable(
                           roundRows[selectedRound]!,
                           () => setState(() => roundRows[selectedRound]!
@@ -459,6 +480,8 @@ class _ExerciseBuilderTableState extends State<ExerciseBuilderTable>
                       ],
                     ),
                   ),
+
+                  // Cooldown Tab
                   SingleChildScrollView(
                     child: _buildReorderableTable(
                       cooldownRows,
@@ -473,18 +496,20 @@ class _ExerciseBuilderTableState extends State<ExerciseBuilderTable>
                 ],
               ),
             ),
-           // Video name input
-           Padding(
-             padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
-             child: TextFormField(
-               controller: _videoNameController,
-               decoration: const InputDecoration(
-                 labelText: 'Video Name',
-                 hintText: 'Enter a name (without .mp4)',
-                 border: OutlineInputBorder(),
-               ),
-             ),
-           ),
+
+            // Video name input
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+              child: TextFormField(
+                controller: _videoNameController,
+                decoration: const InputDecoration(
+                  labelText: 'Video Name',
+                  hintText: 'Enter a name (without .mp4)',
+                  border: OutlineInputBorder(),
+                ),
+              ),
+            ),
+
             const SizedBox(height: 8),
             ElevatedButton(
               onPressed: _submitExercises,
